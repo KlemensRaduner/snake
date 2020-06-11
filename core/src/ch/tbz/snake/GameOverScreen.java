@@ -1,9 +1,8 @@
 package ch.tbz.snake;
 
-public class StatsScreen extends ExtendedScreen {
+public class GameOverScreen extends ExtendedScreen {
 
-
-    public StatsScreen(SnakeGame parent) {
+    public GameOverScreen(SnakeGame parent) {
         super(parent);
     }
 
