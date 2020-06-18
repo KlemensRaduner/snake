@@ -7,4 +7,8 @@ public class StatsManager {
     public List<Integer> getHighScores(){
         return null;
     }
+
+    public void saveHighScores(){}
+
+    public void dispose(){}
 }

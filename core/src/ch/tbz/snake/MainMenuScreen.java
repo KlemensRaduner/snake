@@ -17,11 +17,10 @@ public class MainMenuScreen extends ExtendedScreen {
 
     @Override
     public void show() {
-
-        Gdx.input.setInputProcessor(stage);
+        super.show();
 
         TextButton playButton = new TextButton("Play", skin);
-        TextButton optionButton = new TextButton("Options", skin);
+        TextButton statsButton = new TextButton("Stats", skin);
         TextButton exitButton = new TextButton("Exit", skin);
 
         playButton.addListener(new ClickListener() {
@@ -29,7 +28,7 @@ public class MainMenuScreen extends ExtendedScreen {
                 parent.setScreen(parent.gameScreen);
             }
         });
-        optionButton.addListener(new ClickListener() {
+        statsButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 Gdx.app.debug("Test", "options");
             }
@@ -45,7 +44,7 @@ public class MainMenuScreen extends ExtendedScreen {
         table.center();
         table.add(playButton);
         table.row();
-        table.add(optionButton);
+        table.add(statsButton);
         table.row();
         table.add(exitButton);
         stage.addActor(table);
@@ -54,12 +53,8 @@ public class MainMenuScreen extends ExtendedScreen {
 
     @Override
     public void render(float delta) {
-        Gdx.gl.glClearColor(0, 0, 0, 1);
-        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        super.render(delta);
 
-
-        stage.act();
-        stage.draw();
     }
 
     @Override
@@ -69,17 +64,14 @@ public class MainMenuScreen extends ExtendedScreen {
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
     @Override

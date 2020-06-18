@@ -18,6 +18,7 @@ buildscript {
 allprojects {
     apply plugin: "eclipse"
 
+
     version = '1.0'
     ext {
         appName = "snake"
@@ -53,6 +54,7 @@ project(":desktop") {
 
 project(":core") {
     apply plugin: "java-library"
+
 
 
     dependencies {

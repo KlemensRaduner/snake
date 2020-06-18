@@ -29,4 +29,6 @@ public class GameOverScreen extends ExtendedScreen {
     @Override public void hide() {
 
     }
+
+    public void dispose(){}
 }

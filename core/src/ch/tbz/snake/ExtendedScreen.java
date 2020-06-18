@@ -2,6 +2,7 @@ package ch.tbz.snake;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
@@ -34,6 +35,20 @@ public abstract class ExtendedScreen implements Screen {
         camera.update();
 
         stage = new Stage(viewport, batch);
+    }
+
+
+    @Override
+    public void render(float delta) {
+        Gdx.gl.glClearColor(0, 0, 0, 1);
+        Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+        stage.act();
+        stage.draw();
+    }
+
+    @Override
+    public void show(){
+        Gdx.input.setInputProcessor(stage);
     }
 
     @Override

@@ -30,4 +30,6 @@ public class StatsScreen extends ExtendedScreen {
     @Override public void hide() {
 
     }
+
+    public void dispose(){}
 }
