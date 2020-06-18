@@ -41,7 +41,7 @@ public class Snake {
                 break;
         }
 
-        if (head.x < 0 || head.x > GameScreen.ntiles || head.y < 0 || head.y > GameScreen.ntiles) {
+        if (head.x < 0 || head.x > GameScreen.ntiles - 1 || head.y < 0 || head.y > GameScreen.ntiles - 1) {
             alive = false;
         }
 
@@ -65,7 +65,7 @@ public class Snake {
         segments.forEach(s -> {
             shapeRenderer.rect(s.x * GameScreen.tileSize, s.y * GameScreen.tileSize, GameScreen.tileSize, GameScreen.tileSize);
         });
-        shapeRenderer.rect(head.x * GameScreen.tileSize,  head.y * GameScreen.tileSize, GameScreen.tileSize, GameScreen.tileSize);
+        shapeRenderer.rect(head.x * GameScreen.tileSize, head.y * GameScreen.tileSize, GameScreen.tileSize, GameScreen.tileSize);
 
 
     }

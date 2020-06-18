@@ -14,11 +14,15 @@ public class GameScreen extends ExtendedScreen {
     Fruit fruit;
     float time;
     ShapeRenderer shapeRenderer;
+    StatsManager statsManager;
 
     public GameScreen(SnakeGame parent) {
         super(parent);
+
+        statsManager = new StatsManager();
+
         shapeRenderer = new ShapeRenderer();
-        shapeRenderer.translate(0,tileSize,0);
+        shapeRenderer.translate(tileSize, tileSize*2, 0);
 
 
         fruit = new Fruit();
@@ -26,12 +30,13 @@ public class GameScreen extends ExtendedScreen {
     }
 
     @Override
-    public void show(){
+    public void show() {
         super.show();
 
-        Label label = new Label("Highscore",skin);
+        Label label = new Label("Highscore: "+statsManager.getHighScores().get(0), skin);
         label.setHeight(tileSize);
         label.setFontScale(0.5f);
+        label.setPosition(tileSize, tileSize * 0.5f);
         stage.addActor(label);
     }
 
@@ -70,7 +75,7 @@ public class GameScreen extends ExtendedScreen {
         shapeRenderer.end();
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.rect(0,0,ntiles * tileSize, ntiles *tileSize);
+        shapeRenderer.rect(0, 0, ntiles * tileSize, ntiles * tileSize);
         shapeRenderer.end();
 
         stage.draw();
