@@ -98,10 +98,13 @@ public class GameScreen extends ExtendedScreen {
             time = 0;
         }
 
+        batch.begin();
+        fruit.draw(batch,tileSize, tileSize * 2);
+        batch.end();
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         snake.draw(shapeRenderer);
-        fruit.draw(shapeRenderer);
+       // fruit.draw(shapeRenderer);
         shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.end();
         scoreLabel.setText("SCORE: " + snake.getLength());
