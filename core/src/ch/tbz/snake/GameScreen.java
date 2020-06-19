@@ -37,9 +37,9 @@ public class GameScreen extends ExtendedScreen {
     public void show() {
         super.show();
 
-        timerLabel = new Label("3",skin);
-        timerLabel.setHeight(tileSize*3);
-        timerLabel.setPosition(tileSize * ((ntiles / 2)+1), tileSize * ((ntiles / 2)+1));
+        timerLabel = new Label("3", skin);
+        timerLabel.setHeight(tileSize * 3);
+        timerLabel.setPosition(tileSize * ((ntiles / 2) + 1), tileSize * ((ntiles / 2) + 1));
         stage.addActor(timerLabel);
 
         startDelay = 3;
@@ -49,7 +49,7 @@ public class GameScreen extends ExtendedScreen {
         scoreLabel.setPosition(tileSize * ntiles / 2, tileSize * 0.5f);
         stage.addActor(scoreLabel);
 
-        Label label = new Label("HIGHSCORE: " + statsManager.getHighScores().get(0), skin);
+        Label label = new Label("HIGHSCORE: " + (statsManager.getHighScores().size() > 0 ? statsManager.getHighScores().get(0) : 0), skin);
         label.setHeight(tileSize);
         label.setFontScale(0.5f);
         label.setPosition(tileSize, tileSize * 0.5f);
@@ -60,7 +60,7 @@ public class GameScreen extends ExtendedScreen {
                 startDelay--;
                 timerLabel.setText(startDelay);
             }
-        },1,1,2);
+        }, 1, 1, 2);
     }
 
 
@@ -72,7 +72,7 @@ public class GameScreen extends ExtendedScreen {
         shapeRenderer.rect(0, 0, ntiles * tileSize, ntiles * tileSize);
         shapeRenderer.end();
 
-        if(startDelay > 0 || !snake.alive){
+        if (startDelay > 0 || !snake.alive) {
             return;
         }
         timerLabel.setText("");
@@ -99,12 +99,12 @@ public class GameScreen extends ExtendedScreen {
         }
 
         batch.begin();
-        fruit.draw(batch,tileSize, tileSize * 2);
+        fruit.draw(batch, tileSize, tileSize * 2);
         batch.end();
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         snake.draw(shapeRenderer);
-       // fruit.draw(shapeRenderer);
+        // fruit.draw(shapeRenderer);
         shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.end();
         scoreLabel.setText("SCORE: " + snake.getLength());
