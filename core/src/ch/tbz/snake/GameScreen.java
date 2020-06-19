@@ -30,7 +30,7 @@ public class GameScreen extends ExtendedScreen {
 
 
         fruit = new Fruit();
-        snake = new Snake(fruit);
+        snake = new Snake(fruit, statsManager);
     }
 
     @Override
@@ -98,15 +98,18 @@ public class GameScreen extends ExtendedScreen {
             time = 0;
         }
 
-        batch.begin();
-        fruit.draw(batch, tileSize, tileSize * 2);
-        batch.end();
+
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
         snake.draw(shapeRenderer);
         // fruit.draw(shapeRenderer);
         shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.end();
+
+        batch.begin();
+        fruit.draw(batch, tileSize, tileSize * 2);
+        batch.end();
+
         scoreLabel.setText("SCORE: " + snake.getLength());
         stage.draw();
 

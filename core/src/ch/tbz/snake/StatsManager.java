@@ -6,6 +6,7 @@ import com.badlogic.gdx.Preferences;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StatsManager {
 
@@ -30,7 +31,7 @@ public class StatsManager {
 
     public void saveHighScore(int score) {
         scores.add(score);
-        Collections.sort(scores);
+        Collections.sort(scores, Collections.reverseOrder());
         if (scores.size() > 10) {
             scores.subList(10, scores.size()).clear();
         }

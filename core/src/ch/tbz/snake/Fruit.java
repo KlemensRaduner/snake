@@ -28,6 +28,7 @@ public class Fruit {
         textureList.add(new Texture("fruits/möffin.png"));
         textureList.add(new Texture("fruits/wine.png"));
         textureList.add(new Texture("fruits/iscriim.png"));
+        textureList.add(new Texture("fruits/erdbeerli.png"));
         textureRegions = TextureRegion.split(textureList.get(0), 16, 16);
         sprite = new Sprite(textureRegions[0][0]);
         x = (int) (Math.random() * GameScreen.ntiles);

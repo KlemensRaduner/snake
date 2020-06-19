@@ -15,8 +15,11 @@ public class Snake {
     private ArrayList<Point> segments;
     private Fruit fruit;
 
-    public Snake(Fruit fruit) {
+    private StatsManager statsManager;
+
+    public Snake(Fruit fruit, StatsManager statsManager) {
         this.fruit = fruit;
+        this.statsManager = statsManager;
         alive = true;
         direction = 0;
         head = new Point(GameScreen.ntiles / 2, GameScreen.ntiles / 2);
@@ -47,11 +50,15 @@ public class Snake {
 
         if (head.x < 0 || head.x > GameScreen.ntiles - 1 || head.y < 0 || head.y > GameScreen.ntiles - 1) {
             alive = false;
+            statsManager.saveHighScore(segments.size());
+            return;
         }
 
         segments.forEach(s -> {
             if (s.x == head.x && s.y == head.y) {
                 alive = false;
+                statsManager.saveHighScore(segments.size());
+                return;
             }
         });
 
