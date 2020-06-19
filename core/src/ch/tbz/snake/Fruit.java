@@ -10,7 +10,6 @@ public class Fruit {
     public Fruit() {
         x = (int)( Math.random() * GameScreen.ntiles);
         y = (int)( Math.random() * GameScreen.ntiles);
-
     }
 
     public void spawn() {
@@ -22,6 +21,7 @@ public class Fruit {
         shapeRenderer.setColor(Color.RED);
         shapeRenderer.rect( x * GameScreen.tileSize, y * GameScreen.tileSize,GameScreen.tileSize, GameScreen.tileSize);
     }
+
     public void dispose() {
     }
 

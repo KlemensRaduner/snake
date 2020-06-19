@@ -23,6 +23,10 @@ public class Snake {
         segments = new ArrayList<>();
     }
 
+    public int getLength(){
+        return segments.size();
+    }
+
 
     public void move() {
         segments.add(new Point(head.x, head.y));
