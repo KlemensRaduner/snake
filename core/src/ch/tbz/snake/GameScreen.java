@@ -76,7 +76,7 @@ public class GameScreen extends ExtendedScreen {
             return;
         } else if (!snake.alive){
             parent.setScreen( new GameOverScreen(parent,snake.getLength()));
-            System.out.println("snake tot");
+           return;
         }
         timerLabel.setText("");
 

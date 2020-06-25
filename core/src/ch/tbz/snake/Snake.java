@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class Snake {
 
-    public static final int UP = 0, DOWN = 1, LEFT = 2, RIGHT = 3;
+    public static final int UP = 0, DOWN = 2, LEFT = 1, RIGHT = 3;
     boolean alive;
     int direction;
     private Point head;
@@ -90,9 +90,9 @@ public class Snake {
     }
 
     public void drawHead(SpriteBatch batch , int xoffset, int yoffset){
-        System.out.println(direction * 90);
-        sprite.setRotation(direction * 90);
-        batch.draw(sprite,xoffset+head.x * GameScreen.tileSize, yoffset+head.y * GameScreen.tileSize );
+        sprite.setRotation(direction* 90);
+        sprite.setPosition(xoffset-1+head.x * GameScreen.tileSize, yoffset-1+head.y * GameScreen.tileSize);
+        sprite.draw(batch);
     }
 
     public void dispose() {
