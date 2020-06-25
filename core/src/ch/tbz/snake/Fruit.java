@@ -57,12 +57,6 @@ public class Fruit {
         batch.draw(sprite, xoffset + x * GameScreen.tileSize, yoffset + y * GameScreen.tileSize);
     }
 
-    /*
-    public void draw(ShapeRenderer shapeRenderer) {
-        shapeRenderer.setColor(Color.RED);
-        shapeRenderer.rect( x * GameScreen.tileSize, y * GameScreen.tileSize,GameScreen.tileSize, GameScreen.tileSize);
-    }
-     */
 
     public void dispose() {
     }
