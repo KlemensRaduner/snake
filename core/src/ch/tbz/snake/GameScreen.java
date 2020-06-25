@@ -114,7 +114,7 @@ public class GameScreen extends ExtendedScreen {
         fruit.draw(batch, tileSize, tileSize * 2);
         batch.end();
 
-        scoreLabel.setText("SCORE: " + snake.getLength());
+        scoreLabel.setText("SCORE: " + (snake.getLength()));
         stage.draw();
 
     }

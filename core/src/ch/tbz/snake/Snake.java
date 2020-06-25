@@ -50,6 +50,7 @@ public class Snake {
 
         if (head.x < 0 || head.x > GameScreen.ntiles - 1 || head.y < 0 || head.y > GameScreen.ntiles - 1) {
             alive = false;
+            segments.remove(0);
             statsManager.saveHighScore(segments.size());
             return;
         }
@@ -57,6 +58,7 @@ public class Snake {
         segments.forEach(s -> {
             if (s.x == head.x && s.y == head.y) {
                 alive = false;
+                segments.remove(0);
                 statsManager.saveHighScore(segments.size());
                 return;
             }
@@ -72,7 +74,7 @@ public class Snake {
     }
 
     public void draw(ShapeRenderer shapeRenderer) {
-        shapeRenderer.setColor(Color.WHITE);
+        shapeRenderer.setColor(14f/255, 209f/255,69f/255, 1);
         segments.forEach(s -> {
             shapeRenderer.rect(s.x * GameScreen.tileSize, s.y * GameScreen.tileSize, GameScreen.tileSize, GameScreen.tileSize);
         });
