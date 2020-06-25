@@ -2,7 +2,8 @@ package ch.tbz.snake;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Timer;
 
@@ -20,8 +21,10 @@ public class GameScreen extends ExtendedScreen {
     Fruit fruit;
     float time;
     int startDelay;
-    ShapeRenderer shapeRenderer;
     StatsManager statsManager;
+
+    Texture frameTexture;
+    Sprite frameSprite;
 
     Label scoreLabel;
     Label timerLabel;
@@ -31,8 +34,8 @@ public class GameScreen extends ExtendedScreen {
         super(parent);
         statsManager = new StatsManager();
 
-        shapeRenderer = new ShapeRenderer();
-        shapeRenderer.translate(tileSize, tileSize * 2, 0);
+        frameTexture = new Texture("frame.png");
+        frameSprite = new Sprite(frameTexture);
 
         fruit = new Fruit();
         snake = new Snake(this);
@@ -82,16 +85,12 @@ public class GameScreen extends ExtendedScreen {
         parent.setScreen(new GameOverScreen(parent, score));
     }
 
-    public void drawEdge() {
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-        shapeRenderer.rect(0, 0, ntiles * tileSize, ntiles * tileSize);
-        shapeRenderer.end();
-    }
 
     private void drawGame() {
         batch.begin();
-        fruit.draw(batch, tileSize, tileSize * 2);
+        frameSprite.draw(batch);
         snake.draw(batch, tileSize, tileSize * 2);
+        fruit.draw(batch, tileSize, tileSize * 2);
         batch.end();
 
         scoreLabel.setText("SCORE: " + (snake.getLength()));
@@ -102,7 +101,9 @@ public class GameScreen extends ExtendedScreen {
     public void render(float delta) {
         super.render(delta);
         time += delta;
-        drawEdge();
+        batch.begin();
+        frameSprite.draw(batch);
+        batch.end();
 
         switch (state) {
             case PAUSE:
@@ -148,7 +149,7 @@ public class GameScreen extends ExtendedScreen {
 
     @Override
     public void resize(int width, int height) {
-
+        super.resize(width,height);
     }
 
     @Override

@@ -22,15 +22,14 @@ public abstract class ExtendedScreen implements Screen {
     SnakeGame parent;
 
 
-    public ExtendedScreen(SnakeGame parent){
-        this.parent =  parent;
+    public ExtendedScreen(SnakeGame parent) {
+        this.parent = parent;
         atlas = new TextureAtlas("skin/vhs-ui.atlas");
         skin = new Skin(Gdx.files.internal("skin/vhs-ui.json"));
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
-        viewport = new FillViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        viewport = new FillViewport(SnakeGame.WIDTH, SnakeGame.HEIGHT);
         viewport.apply();
-
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         camera.update();
 
@@ -47,7 +46,7 @@ public abstract class ExtendedScreen implements Screen {
     }
 
     @Override
-    public void show(){
+    public void show() {
         Gdx.input.setInputProcessor(stage);
     }
 
