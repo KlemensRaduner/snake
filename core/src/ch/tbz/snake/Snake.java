@@ -1,6 +1,8 @@
 package ch.tbz.snake;
 
-import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import java.awt.*;
@@ -15,6 +17,9 @@ public class Snake {
     private ArrayList<Point> segments;
     private Fruit fruit;
 
+    private Texture texture;
+    private Sprite sprite;
+
     private StatsManager statsManager;
 
     public Snake(Fruit fruit, StatsManager statsManager) {
@@ -24,6 +29,9 @@ public class Snake {
         direction = 0;
         head = new Point(GameScreen.ntiles / 2, GameScreen.ntiles / 2);
         segments = new ArrayList<>();
+
+        texture = new Texture("snek/snakehead.png");
+        sprite = new Sprite(texture);
     }
 
     public int getLength(){
@@ -73,14 +81,18 @@ public class Snake {
 
     }
 
-    public void draw(ShapeRenderer shapeRenderer) {
+    public void drawBody(ShapeRenderer shapeRenderer) {
         shapeRenderer.setColor(14f/255, 209f/255,69f/255, 1);
         segments.forEach(s -> {
             shapeRenderer.rect(s.x * GameScreen.tileSize, s.y * GameScreen.tileSize, GameScreen.tileSize, GameScreen.tileSize);
         });
-        shapeRenderer.rect(head.x * GameScreen.tileSize, head.y * GameScreen.tileSize, GameScreen.tileSize, GameScreen.tileSize);
 
+    }
 
+    public void drawHead(SpriteBatch batch , int xoffset, int yoffset){
+        System.out.println(direction * 90);
+        sprite.setRotation(direction * 90);
+        batch.draw(sprite,xoffset+head.x * GameScreen.tileSize, yoffset+head.y * GameScreen.tileSize );
     }
 
     public void dispose() {

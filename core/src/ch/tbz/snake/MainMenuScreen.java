@@ -23,7 +23,7 @@ public class MainMenuScreen extends ExtendedScreen {
 
         playButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                parent.setScreen(parent.gameScreen);
+                parent.setScreen(new GameScreen(parent));
             }
         });
         statsButton.addListener(new ClickListener() {

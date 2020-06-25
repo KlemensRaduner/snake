@@ -26,7 +26,7 @@ public class GameOverScreen extends ExtendedScreen {
         TextButton exitButton = new TextButton("Exit", skin);
         playButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                parent.setScreen(parent.gameScreen);
+                parent.setScreen(new GameScreen(parent));
             }
         });
         statsButton.addListener(new ClickListener() {

@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Timer;
-import javafx.scene.Parent;
 
 public class GameScreen extends ExtendedScreen {
 
@@ -105,13 +104,13 @@ public class GameScreen extends ExtendedScreen {
 
 
         shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-        snake.draw(shapeRenderer);
-        // fruit.draw(shapeRenderer);
+        snake.drawBody(shapeRenderer);
         shapeRenderer.setColor(Color.WHITE);
         shapeRenderer.end();
 
         batch.begin();
         fruit.draw(batch, tileSize, tileSize * 2);
+        snake.drawHead(batch, tileSize, tileSize * 2);
         batch.end();
 
         scoreLabel.setText("SCORE: " + (snake.getLength()));
