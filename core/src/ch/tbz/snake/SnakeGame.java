@@ -12,7 +12,6 @@ public class SnakeGame extends Game {
 
 	@Override
 	public void create () {
-		System.out.println(WIDTH+" "+HEIGHT);
 		Gdx.app.setLogLevel(Application.LOG_DEBUG);
 
 		statsManager = new StatsManager();
