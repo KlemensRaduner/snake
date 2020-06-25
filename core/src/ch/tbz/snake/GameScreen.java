@@ -6,6 +6,7 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
 import com.badlogic.gdx.utils.Timer;
+import javafx.scene.Parent;
 
 public class GameScreen extends ExtendedScreen {
 
@@ -72,8 +73,11 @@ public class GameScreen extends ExtendedScreen {
         shapeRenderer.rect(0, 0, ntiles * tileSize, ntiles * tileSize);
         shapeRenderer.end();
 
-        if (startDelay > 0 || !snake.alive) {
+        if (startDelay > 0 ) {
             return;
+        } else if (!snake.alive){
+            parent.setScreen( new GameOverScreen(parent,snake.getLength()));
+            System.out.println("snake tot");
         }
         timerLabel.setText("");
 
