@@ -63,14 +63,14 @@ public class Snake {
             return;
         }
 
-        segments.forEach(s -> {
-            if (s.x == head.x && s.y == head.y) {
+       for(int i = 0;i<segments.size();i++){
+            if (segments.get(i).x == head.x && segments.get(i).y == head.y) {
                 alive = false;
                 segments.remove(0);
                 statsManager.saveHighScore(segments.size());
                 return;
             }
-        });
+        };
 
         if (fruit.x == head.x && fruit.y == head.y) {
             fruit.spawn();
