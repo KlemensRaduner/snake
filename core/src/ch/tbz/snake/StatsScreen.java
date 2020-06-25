@@ -8,15 +8,16 @@ public class StatsScreen extends ExtendedScreen {
     }
 
     @Override public void show() {
+        super.show();
 
     }
 
     @Override public void render(float delta) {
-
+        super.render(delta);
     }
 
     @Override public void resize(int width, int height) {
-
+        super.resize(width, height);
     }
 
     @Override public void pause() {
@@ -31,5 +32,6 @@ public class StatsScreen extends ExtendedScreen {
 
     }
 
-    public void dispose(){}
+    public void dispose() {
+    }
 }

@@ -3,7 +3,6 @@ package ch.tbz.snake;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -11,27 +10,25 @@ import java.util.ArrayList;
 public class Snake {
 
     public static final int UP = 0, DOWN = 2, LEFT = 1, RIGHT = 3;
-    boolean alive;
+    private GameScreen gameScreen;
     int direction;
     private Point head;
     private ArrayList<Point> segments;
-    private Fruit fruit;
 
-    private Texture texture;
-    private Sprite sprite;
+    private Texture headTexture, bodyTexture;
+    private Sprite headSprite;
 
-    private StatsManager statsManager;
 
-    public Snake(Fruit fruit, StatsManager statsManager) {
-        this.fruit = fruit;
-        this.statsManager = statsManager;
-        alive = true;
+    public Snake(GameScreen gameScreen) {
+        this.gameScreen = gameScreen;
         direction = 0;
         head = new Point(GameScreen.ntiles / 2, GameScreen.ntiles / 2);
         segments = new ArrayList<>();
 
-        texture = new Texture("snek/snakehead.png");
-        sprite = new Sprite(texture);
+
+        bodyTexture = new Texture("snek/snakebody.png");
+        headTexture = new Texture("snek/snakehead.png");
+        headSprite = new Sprite(headTexture);
     }
 
     public int getLength(){
@@ -57,23 +54,21 @@ public class Snake {
         }
 
         if (head.x < 0 || head.x > GameScreen.ntiles - 1 || head.y < 0 || head.y > GameScreen.ntiles - 1) {
-            alive = false;
-            segments.remove(0);
-            statsManager.saveHighScore(segments.size());
+            gameScreen.endGame(segments.size()-1);
+            gameScreen.statsManager.saveHighScore(segments.size()-1);
             return;
         }
 
        for(int i = 0;i<segments.size();i++){
             if (segments.get(i).x == head.x && segments.get(i).y == head.y) {
-                alive = false;
-                segments.remove(0);
-                statsManager.saveHighScore(segments.size());
+                gameScreen.endGame(segments.size()-1);
+                gameScreen.statsManager.saveHighScore(segments.size()-1);
                 return;
             }
         };
 
-        if (fruit.x == head.x && fruit.y == head.y) {
-            fruit.spawn();
+        if (gameScreen.fruit.x == head.x && gameScreen.fruit.y == head.y) {
+            gameScreen.fruit.spawn();
         } else {
             segments.remove(0);
         }
@@ -81,20 +76,19 @@ public class Snake {
 
     }
 
-    public void drawBody(ShapeRenderer shapeRenderer) {
-        shapeRenderer.setColor(14f/255, 209f/255,69f/255, 1);
+    public void draw(SpriteBatch batch , int xoffset, int yoffset){
         segments.forEach(s -> {
-            shapeRenderer.rect(s.x * GameScreen.tileSize, s.y * GameScreen.tileSize, GameScreen.tileSize, GameScreen.tileSize);
+            Sprite sprite = new Sprite(bodyTexture);
+            sprite.setPosition(xoffset + s.x * GameScreen.tileSize, yoffset +s.y * GameScreen.tileSize);
+            sprite.draw(batch);
         });
-
-    }
-
-    public void drawHead(SpriteBatch batch , int xoffset, int yoffset){
-        sprite.setRotation(direction* 90);
-        sprite.setPosition(xoffset-1+head.x * GameScreen.tileSize, yoffset-1+head.y * GameScreen.tileSize);
-        sprite.draw(batch);
+        headSprite.setRotation(direction* 90);
+        headSprite.setPosition(xoffset-1+head.x * GameScreen.tileSize, yoffset-1+head.y * GameScreen.tileSize);
+        headSprite.draw(batch);
     }
 
     public void dispose() {
+        bodyTexture.dispose();
+        headTexture.dispose();
     }
 }

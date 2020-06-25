@@ -60,6 +60,7 @@ public class Fruit {
 
 
     public void dispose() {
+        textureList.forEach(texture -> texture.dispose());
     }
 
 }

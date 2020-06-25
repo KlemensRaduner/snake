@@ -28,7 +28,7 @@ public class MainMenuScreen extends ExtendedScreen {
         });
         statsButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
-                Gdx.app.debug("Test", "options");
+                parent.setScreen(new StatsScreen(parent));
             }
         });
         exitButton.addListener(new ClickListener() {
