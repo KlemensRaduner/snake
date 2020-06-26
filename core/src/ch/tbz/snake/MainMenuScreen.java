@@ -1,6 +1,7 @@
 package ch.tbz.snake;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
 import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
@@ -16,7 +17,6 @@ public class MainMenuScreen extends ExtendedScreen {
 
     @Override
     public void show() {
-        super.show();
         TextButton playButton = new TextButton("Play", skin);
         TextButton statsButton = new TextButton("Stats", skin);
         TextButton exitButton = new TextButton("Exit", skin);
@@ -37,7 +37,7 @@ public class MainMenuScreen extends ExtendedScreen {
             }
         });
 
-        Table table = new Table();
+        table = new Table();
         table.setFillParent(true);
         table.center();
         table.add(playButton);
@@ -46,7 +46,7 @@ public class MainMenuScreen extends ExtendedScreen {
         table.row();
         table.add(exitButton);
         stage.addActor(table);
-
+        super.show();
     }
 
     @Override

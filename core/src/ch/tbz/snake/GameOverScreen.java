@@ -18,7 +18,6 @@ public class GameOverScreen extends ExtendedScreen {
 
     @Override
     public void show() {
-        super.show();
         Label dead = new Label("You died after " + score, skin);
         Label empty = new Label(" ",skin);
         TextButton playButton = new TextButton("Play Again", skin);
@@ -54,6 +53,7 @@ public class GameOverScreen extends ExtendedScreen {
         table.row();
         table.add(exitButton);
         stage.addActor(table);
+        super.show();
 
     }
 

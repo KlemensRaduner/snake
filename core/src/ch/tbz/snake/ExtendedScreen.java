@@ -8,7 +8,8 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
-import com.badlogic.gdx.utils.viewport.FillViewport;
+import com.badlogic.gdx.scenes.scene2d.ui.Table;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.badlogic.gdx.utils.viewport.Viewport;
 
 public abstract class ExtendedScreen implements Screen {
@@ -20,6 +21,7 @@ public abstract class ExtendedScreen implements Screen {
     TextureAtlas atlas;
     Skin skin;
     SnakeGame parent;
+    Table table;
 
 
     public ExtendedScreen(SnakeGame parent) {
@@ -28,7 +30,7 @@ public abstract class ExtendedScreen implements Screen {
         skin = new Skin(Gdx.files.internal("skin/vhs-ui.json"));
         batch = new SpriteBatch();
         camera = new OrthographicCamera();
-        viewport = new FillViewport(SnakeGame.WIDTH, SnakeGame.HEIGHT);
+        viewport = new FitViewport(SnakeGame.WIDTH, SnakeGame.HEIGHT,camera);
         viewport.apply();
         camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
         camera.update();
@@ -41,19 +43,19 @@ public abstract class ExtendedScreen implements Screen {
     public void render(float delta) {
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
+
         stage.act();
         stage.draw();
     }
 
     @Override
     public void show() {
-        Gdx.input.setInputProcessor(stage);
+        Gdx.input.setInputProcessor(new MenuInputController(stage));
     }
 
     @Override
     public void resize(int width, int height) {
-        viewport.update(width, height);
-        camera.position.set(camera.viewportWidth / 2, camera.viewportHeight / 2, 0);
+        viewport.update(width, height, true);
     }
 
 

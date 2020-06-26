@@ -45,8 +45,6 @@ public class GameScreen extends ExtendedScreen {
 
     @Override
     public void show() {
-        super.show();
-
         pauseLabel = new Label("", skin);
         pauseLabel.setHeight(tileSize * 3);
         pauseLabel.setPosition(tileSize * ((ntiles / 2) - 1.5f), tileSize * ((ntiles / 2) + 1));
@@ -79,6 +77,7 @@ public class GameScreen extends ExtendedScreen {
                 }
             }
         }, 1, 1, 2);
+        super.show();
     }
 
     public void endGame(int score) {
@@ -108,7 +107,7 @@ public class GameScreen extends ExtendedScreen {
         switch (state) {
             case PAUSE:
                 pauseLabel.setText("PAUSE");
-                if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE) && time > 0.2) {
+                if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && time > 0.2) {
                     state = RUNNING;
                     pauseLabel.setText("");
                     time = 0;
@@ -130,7 +129,7 @@ public class GameScreen extends ExtendedScreen {
                 if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && snake.direction != Snake.RIGHT) {
                     snake.direction = Snake.LEFT;
                 }
-                if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE) && time >= 0.1) {
+                if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && time >= 0.1) {
                     state = PAUSE;
                     time = 0;
                     break;

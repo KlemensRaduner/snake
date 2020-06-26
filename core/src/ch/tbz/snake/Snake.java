@@ -9,14 +9,14 @@ import java.util.ArrayList;
 
 public class Snake {
 
-    public static final int UP = 0, DOWN = 2, LEFT = 1, RIGHT = 3;
+    public static final int UP = 0, LEFT = 1, DOWN = 2,  RIGHT = 3;
     private GameScreen gameScreen;
     int direction;
     private Point head;
     private ArrayList<Point> segments;
 
-    private Texture headTexture, bodyTexture;
-    private Sprite headSprite;
+    private Texture headTexture, bodyTexture, tailTexture;
+    private Sprite headSprite, tailSprite;
 
 
     public Snake(GameScreen gameScreen) {
@@ -28,7 +28,9 @@ public class Snake {
 
         bodyTexture = new Texture("snek/snakebody.png");
         headTexture = new Texture("snek/snakehead.png");
+        tailTexture = new Texture( "snek/snaketail.png");
         headSprite = new Sprite(headTexture);
+        tailSprite = new Sprite(tailTexture);
     }
 
     public int getLength(){
@@ -77,17 +79,46 @@ public class Snake {
     }
 
     public void draw(SpriteBatch batch , int xoffset, int yoffset){
-        segments.forEach(s -> {
+
+        for(int i = 1;i<segments.size();i++){
             Sprite sprite = new Sprite(bodyTexture);
-            sprite.setPosition(xoffset + s.x * GameScreen.tileSize, yoffset +s.y * GameScreen.tileSize);
+            sprite.setPosition(xoffset + segments.get(i).x * GameScreen.tileSize, yoffset +segments.get(i).y * GameScreen.tileSize);
             sprite.draw(batch);
-        });
+        }
+
         headSprite.setRotation(direction* 90);
         headSprite.setPosition(xoffset-1+head.x * GameScreen.tileSize, yoffset-1+head.y * GameScreen.tileSize);
         headSprite.draw(batch);
+
+        if(segments.size() > 0){
+            if(segments.size() == 1){
+                tailSprite.setRotation(direction* 90);
+            }else {
+                  int dx =  segments.get(1).x -segments.get(0).x;
+                  int dy = segments.get(1).y - segments.get(0).y;
+                switch (2*dx+dy){
+                    case 1:
+                        tailSprite.setRotation(UP *90);
+                        break;
+                    case 2:
+                        tailSprite.setRotation(RIGHT *90);
+                        break;
+                    case -1:
+                        tailSprite.setRotation(DOWN *90);
+                        break;
+                    case -2:
+                        tailSprite.setRotation(LEFT *90);
+                        break;
+                }
+            }
+            tailSprite.setPosition(xoffset + segments.get(0).x * GameScreen.tileSize, yoffset +segments.get(0).y * GameScreen.tileSize);
+            tailSprite.draw(batch);
+        }
+
     }
 
     public void dispose() {
+        tailTexture.dispose();
         bodyTexture.dispose();
         headTexture.dispose();
     }
