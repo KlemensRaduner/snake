@@ -16,7 +16,9 @@ public class GameScreen extends ExtendedScreen {
     private static final int RUNNING = 1;
     private static final int PAUSE = 2;
 
+    // the game field is square with a side length of ntiles
     public static int ntiles = 25;
+    // the size of a tile in pixels
     public static int tileSize = 16;
 
     Snake snake;
