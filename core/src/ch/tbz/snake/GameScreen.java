@@ -2,7 +2,6 @@ package ch.tbz.snake;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
-import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -11,12 +10,14 @@ import com.badlogic.gdx.utils.Timer;
 
 public class GameScreen extends ExtendedScreen {
 
+    // the game has 3 states it can be in
+    int state;
     private static final int STARTING = 0;
     private static final int RUNNING = 1;
     private static final int PAUSE = 2;
+
     public static int ntiles = 25;
     public static int tileSize = 16;
-    int state;
 
     Snake snake;
     Fruit fruit;
@@ -69,6 +70,7 @@ public class GameScreen extends ExtendedScreen {
         label.setPosition(tileSize, tileSize * 0.5f);
         stage.addActor(label);
 
+        // start the 3 second countdown
         Timer.schedule(new Timer.Task() {
             @Override public void run() {
                 startDelay--;
@@ -100,7 +102,9 @@ public class GameScreen extends ExtendedScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
+        // store the time since last frame
         time += delta;
+
         batch.begin();
         frameSprite.draw(batch);
         batch.end();
@@ -117,6 +121,8 @@ public class GameScreen extends ExtendedScreen {
                 break;
             case RUNNING:
                 timerLabel.setText("");
+
+                // handle user inputs
 
                 if (Gdx.input.isKeyPressed(Input.Keys.UP) && snake.direction != Snake.DOWN) {
                     snake.direction = Snake.UP;
@@ -136,7 +142,7 @@ public class GameScreen extends ExtendedScreen {
                     break;
                 }
 
-
+                // if enough time has passed since last movement, move
                 if (time >= 0.1) {
                     snake.move();
                     time = 0;

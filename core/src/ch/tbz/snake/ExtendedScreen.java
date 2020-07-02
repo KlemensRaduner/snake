@@ -41,6 +41,7 @@ public abstract class ExtendedScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        // clear screen
         Gdx.gl.glClearColor(0, 0, 0, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
@@ -50,11 +51,14 @@ public abstract class ExtendedScreen implements Screen {
 
     @Override
     public void show() {
+        // updates InputController
+        // is here because it has to be called after the setScreen was called
         Gdx.input.setInputProcessor(new MenuInputController(stage));
     }
 
     @Override
     public void resize(int width, int height) {
+        // updates viewport to fit into new window size
         viewport.update(width, height, true);
     }
 

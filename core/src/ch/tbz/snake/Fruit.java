@@ -35,6 +35,8 @@ public class Fruit {
         x = (int) (Math.random() * GameScreen.ntiles);
         y = (int) (Math.random() * GameScreen.ntiles);
 
+
+        // start animation timer
         Timer.schedule(new Timer.Task() {
             @Override public void run() {
                 frame++;
@@ -47,6 +49,7 @@ public class Fruit {
     }
 
     public void spawn() {
+        // set Sprite to random position with random Texture
         x = (int) (Math.random() * GameScreen.ntiles);
         y = (int) (Math.random() * GameScreen.ntiles);
         textureRegions = TextureRegion.split(textureList.get((int) (Math.random() * textureList.size())), 16, 16);
