@@ -24,8 +24,6 @@ public class Snake {
         direction = 0;
         head = new Point(GameScreen.ntiles / 2, GameScreen.ntiles / 2);
         segments = new ArrayList<>();
-
-
         bodyTexture = new Texture("snek/snakebody.png");
         headTexture = new Texture("snek/snakehead.png");
         tailTexture = new Texture( "snek/snaketail.png");
@@ -39,6 +37,7 @@ public class Snake {
 
 
     public void move() {
+        // add a new segment at the head position
         segments.add(new Point(head.x, head.y));
         switch (direction) {
             case UP:
@@ -55,12 +54,14 @@ public class Snake {
                 break;
         }
 
+        // test if snake is in wall
         if (head.x < 0 || head.x > GameScreen.ntiles - 1 || head.y < 0 || head.y > GameScreen.ntiles - 1) {
             gameScreen.endGame(segments.size()-1);
             gameScreen.statsManager.saveHighScore(segments.size()-1);
             return;
         }
 
+        // test if snake has eaten its tail
        for(int i = 0;i<segments.size();i++){
             if (segments.get(i).x == head.x && segments.get(i).y == head.y) {
                 gameScreen.endGame(segments.size()-1);
@@ -69,6 +70,7 @@ public class Snake {
             }
         };
 
+       // test if fruit is eaten
         if (gameScreen.fruit.x == head.x && gameScreen.fruit.y == head.y) {
             gameScreen.fruit.spawn();
         } else {
@@ -80,16 +82,19 @@ public class Snake {
 
     public void draw(SpriteBatch batch , int xoffset, int yoffset){
 
+        // draw body
         for(int i = 1;i<segments.size();i++){
             Sprite sprite = new Sprite(bodyTexture);
             sprite.setPosition(xoffset + segments.get(i).x * GameScreen.tileSize, yoffset +segments.get(i).y * GameScreen.tileSize);
             sprite.draw(batch);
         }
 
+        // draw head
         headSprite.setRotation(direction* 90);
         headSprite.setPosition(xoffset-1+head.x * GameScreen.tileSize, yoffset-1+head.y * GameScreen.tileSize);
         headSprite.draw(batch);
 
+        // draw tail
         if(segments.size() > 0){
             if(segments.size() == 1){
                 tailSprite.setRotation(direction* 90);

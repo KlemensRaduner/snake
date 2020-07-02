@@ -2,6 +2,7 @@ package ch.tbz.snake;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.scenes.scene2d.ui.Label;
@@ -107,7 +108,7 @@ public class GameScreen extends ExtendedScreen {
         switch (state) {
             case PAUSE:
                 pauseLabel.setText("PAUSE");
-                if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && time > 0.2) {
+                if ((Gdx.input.isKeyPressed(Input.Keys.SPACE) ||Gdx.input.isKeyPressed(Input.Keys.ENTER) )&& time > 0.2) {
                     state = RUNNING;
                     pauseLabel.setText("");
                     time = 0;
@@ -129,7 +130,7 @@ public class GameScreen extends ExtendedScreen {
                 if (Gdx.input.isKeyPressed(Input.Keys.LEFT) && snake.direction != Snake.RIGHT) {
                     snake.direction = Snake.LEFT;
                 }
-                if (Gdx.input.isKeyPressed(Input.Keys.SPACE) && time >= 0.1) {
+                if ((Gdx.input.isKeyPressed(Input.Keys.SPACE) ||Gdx.input.isKeyPressed(Input.Keys.ENTER) )&& time >= 0.1) {
                     state = PAUSE;
                     time = 0;
                     break;

@@ -1,5 +1,6 @@
 package ch.tbz.snake;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 import com.badlogic.gdx.scenes.scene2d.Actor;
@@ -8,7 +9,6 @@ import com.badlogic.gdx.scenes.scene2d.InputEvent;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.scenes.scene2d.ui.Button;
 import com.badlogic.gdx.scenes.scene2d.ui.Table;
-import com.badlogic.gdx.scenes.scene2d.ui.TextButton;
 import com.badlogic.gdx.scenes.scene2d.utils.ClickListener;
 import com.badlogic.gdx.utils.Array;
 
@@ -23,25 +23,25 @@ public class MenuInputController implements InputProcessor {
     List<Button> buttons = new ArrayList<>();
 
     public MenuInputController(Stage stage) {
-        this.stage  = stage;
-        stage.getActors().forEach(a ->{
+        this.stage = stage;
+        stage.getActors().forEach(a -> {
             buttons.addAll(getButtonsFromActor(a));
         });
-        if(buttons.size()>0){
+        if (buttons.size() > 0) {
             setFocus(buttons.get(0));
         }
     }
 
-    public List<Button> getButtonsFromActor(Actor actor){
+    public List<Button> getButtonsFromActor(Actor actor) {
         ArrayList<Button> b = new ArrayList<>();
-        if(actor instanceof Table){
+        if (actor instanceof Table) {
             Table t = (Table) actor;
-            if(t.getChildren().size>0){
-                t.getChildren().forEach(c ->{
+            if (t.getChildren().size > 0) {
+                t.getChildren().forEach(c -> {
                     b.addAll(getButtonsFromActor(c));
                 });
             }
-            if(actor instanceof Button){
+            if (actor instanceof Button) {
                 b.add((Button) actor);
             }
         }
@@ -65,10 +65,9 @@ public class MenuInputController implements InputProcessor {
 
     public void clickButton(Button b) {
         Array<EventListener> listeners = b.getListeners();
-        for(int i=0;i<listeners.size;i++)
-        {
-            if(listeners.get(i) instanceof ClickListener){
-                ((ClickListener)listeners.get(i)).clicked(null, 0, 0);
+        for (int i = 0; i < listeners.size; i++) {
+            if (listeners.get(i) instanceof ClickListener) {
+                ((ClickListener) listeners.get(i)).clicked(null, 0, 0);
             }
         }
     }
@@ -99,7 +98,7 @@ public class MenuInputController implements InputProcessor {
 
                 setFocus(buttons.get(index));
 
-            } else if (keycode == Input.Keys.SPACE) {
+            } else if ((Gdx.input.isKeyPressed(Input.Keys.SPACE) || Gdx.input.isKeyPressed(Input.Keys.ENTER))) {
                 clickButton(buttons.get(index));
             }
 
