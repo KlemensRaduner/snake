@@ -11,7 +11,6 @@ import java.util.List;
 
 public class Fruit {
 
-
     int x, y;
     int frame;
     private List<Texture> textureList;
@@ -19,6 +18,7 @@ public class Fruit {
     private Sprite sprite;
 
     public Fruit() {
+        // load all textures and store them in a list
         textureList = new ArrayList<Texture>();
         textureList.add(new Texture("fruits/mouse.png"));
         textureList.add(new Texture("fruits/apple.png"));
@@ -31,9 +31,8 @@ public class Fruit {
         textureList.add(new Texture("fruits/erdbeerli.png"));
         textureList.add(new Texture("fruits/cherry.png"));
         textureRegions = TextureRegion.split(textureList.get(0), 16, 16);
-        sprite = new Sprite(textureRegions[0][0]);
-        x = (int) (Math.random() * GameScreen.ntiles);
-        y = (int) (Math.random() * GameScreen.ntiles);
+        sprite = new Sprite();
+        spawn();
 
 
         // start animation timer

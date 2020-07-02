@@ -50,15 +50,12 @@ public class StatsScreen extends ExtendedScreen {
     }
 
     @Override public void pause() {
-
     }
 
     @Override public void resume() {
-
     }
 
     @Override public void hide() {
-
     }
 
     public void dispose() {

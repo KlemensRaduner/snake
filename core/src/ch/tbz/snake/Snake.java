@@ -31,11 +31,17 @@ public class Snake {
         tailSprite = new Sprite(tailTexture);
     }
 
+    /**
+     * @return int
+     */
     public int getLength(){
         return segments.size();
     }
 
-
+    /**
+     * moves the snake by adding a new segment at the old position of the head
+     * and removing the last segment.
+     */
     public void move() {
         // add a new segment at the head position
         segments.add(new Point(head.x, head.y));

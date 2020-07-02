@@ -47,23 +47,27 @@ public class GameScreen extends ExtendedScreen {
 
     @Override
     public void show() {
+        // Label in the middle of the screen to show pause status
         pauseLabel = new Label("", skin);
         pauseLabel.setHeight(tileSize * 3);
         pauseLabel.setPosition(tileSize * ((ntiles / 2) - 1.5f), tileSize * ((ntiles / 2) + 1));
         stage.addActor(pauseLabel);
 
+
+        // label in the middle of the screen to show countdown
         timerLabel = new Label("3", skin);
         timerLabel.setHeight(tileSize * 3);
         timerLabel.setPosition(tileSize * ((ntiles / 2) + 1), tileSize * ((ntiles / 2) + 1));
         stage.addActor(timerLabel);
 
-        startDelay = 3;
+        // label that shows the current score
         scoreLabel = new Label("SCORE: " + 0, skin);
         scoreLabel.setHeight(tileSize);
         scoreLabel.setFontScale(0.5f);
         scoreLabel.setPosition(tileSize * ntiles / 2, tileSize * 0.5f);
         stage.addActor(scoreLabel);
 
+        // label that shows the highscore
         Label label = new Label("HIGHSCORE: " + (statsManager.getHighScores().size() > 0 ? statsManager.getHighScores().get(0) : 0), skin);
         label.setHeight(tileSize);
         label.setFontScale(0.5f);
@@ -71,6 +75,7 @@ public class GameScreen extends ExtendedScreen {
         stage.addActor(label);
 
         // start the 3 second countdown
+        startDelay = 3;
         Timer.schedule(new Timer.Task() {
             @Override public void run() {
                 startDelay--;
@@ -90,6 +95,8 @@ public class GameScreen extends ExtendedScreen {
 
     private void drawGame() {
         batch.begin();
+        // order is important
+        // fruit has to be after snake or it could be invisible
         frameSprite.draw(batch);
         snake.draw(batch, tileSize, tileSize * 2);
         fruit.draw(batch, tileSize, tileSize * 2);
@@ -112,7 +119,8 @@ public class GameScreen extends ExtendedScreen {
         switch (state) {
             case PAUSE:
                 pauseLabel.setText("PAUSE");
-                if ((Gdx.input.isKeyPressed(Input.Keys.SPACE) ||Gdx.input.isKeyPressed(Input.Keys.ENTER) )&& time > 0.2) {
+                // time > 0.1 is there
+                if ((Gdx.input.isKeyPressed(Input.Keys.SPACE) ||Gdx.input.isKeyPressed(Input.Keys.ENTER) )&& time > 0.1) {
                     state = RUNNING;
                     pauseLabel.setText("");
                     time = 0;
@@ -160,17 +168,14 @@ public class GameScreen extends ExtendedScreen {
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
     @Override

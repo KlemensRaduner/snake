@@ -24,10 +24,17 @@ public class StatsManager {
         }
     }
 
+    /**
+     * @return List<Integer>
+     */
     public List<Integer> getHighScores() {
         return scores;
     }
 
+    /**
+     * Saves the 10 best scores to the preferrences
+     * @param score
+     */
     public void saveHighScore(int score) {
         scores.add(score);
         Collections.sort(scores, Collections.reverseOrder());

@@ -17,11 +17,10 @@ public class GameOverScreen extends ExtendedScreen {
 
     @Override
     public void show() {
-        Label dead = new Label("You died after " + score, skin);
-        Label empty = new Label(" ",skin);
         TextButton playButton = new TextButton("Play Again", skin);
         TextButton statsButton = new TextButton("Stats", skin);
         TextButton exitButton = new TextButton("Exit", skin);
+
         playButton.addListener(new ClickListener() {
             public void clicked(InputEvent event, float x, float y) {
                 parent.setScreen(new GameScreen(parent));
@@ -37,6 +36,9 @@ public class GameOverScreen extends ExtendedScreen {
                 Gdx.app.exit();
             }
         });
+
+        Label dead = new Label("You died after " + score, skin);
+        Label empty = new Label(" ",skin);
 
         Table table = new Table();
         table.setFillParent(true);
@@ -59,7 +61,6 @@ public class GameOverScreen extends ExtendedScreen {
     @Override
     public void render(float delta) {
         super.render(delta);
-
     }
 
     @Override
@@ -69,17 +70,14 @@ public class GameOverScreen extends ExtendedScreen {
 
     @Override
     public void pause() {
-
     }
 
     @Override
     public void resume() {
-
     }
 
     @Override
     public void hide() {
-
     }
 
     public void dispose() {

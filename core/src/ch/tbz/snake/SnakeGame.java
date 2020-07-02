@@ -6,6 +6,7 @@ import com.badlogic.gdx.Gdx;
 
 public class SnakeGame extends Game {
 
+	// initial window size in pixel
 	public static int WIDTH = GameScreen.tileSize * (GameScreen.ntiles +2);
 	public static int HEIGHT = GameScreen.tileSize * (GameScreen.ntiles +3);
 
